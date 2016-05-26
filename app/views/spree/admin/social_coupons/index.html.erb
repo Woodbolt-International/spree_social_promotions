@@ -23,7 +23,7 @@
 <% if @social_coupon %>
 <div class="row">
   <div class="col-md-12">
-    <% meta_data = @social_coupon.promotion_rule.promotion.actions.where(type:Spree::Promotion::Actions::SocialCouponAction).first.calculator.preferences %>
+    <% meta_data = @social_coupon.promotion_rule.promotion.actions.where(type:Spree::Promotion::Actions::SocialCouponAction).first.try(:calculator).try(:preferences) %>
     <table class="table">
       <thead>
         <tr>
@@ -42,12 +42,12 @@
           <td><%= @social_coupon.code %></td>
           <td><%= !@social_coupon.disabled? %></td>
           <td><%= link_to @social_coupon.promotion_rule.promotion.name, edit_admin_promotion_path(@social_coupon.promotion_rule.promotion) %></td>
-          <td><%= DateTime.parse(meta_data[:deadline_date]).strftime("%m/%d/%Y") %></td>
-          <td><%= meta_data[:amount_before_deadline] %></td>
-          <td><%= meta_data[:amount_after_deadline] %></td>
-          <td><%= meta_data[:currency] %></td>
+          <td><%= DateTime.parse(meta_data[:deadline_date]).strftime("%m/%d/%Y") rescue "-" %></td>
+          <td><%= meta_data[:amount_before_deadline] rescue "-" %></td>
+          <td><%= meta_data[:amount_after_deadline] rescue "-" %></td>
+          <td><%= meta_data[:currency] rescue "-" %></td>
           <td class="actions actions-2">
-            <%= link_to 'disable', spree.disable_social_coupon_path(@social_coupon), class: 'btn btn-primary', data: {confirm: 'Do you really want to disable the following coupon code?'}, method: :put %>
+            <%= link_to 'disable', disable_admin_social_coupon_path(@social_coupon), class: 'btn btn-primary', data: {confirm: 'Do you really want to disable the following coupon code?'}, method: :put %>
           </td>
         </tr>
       </tbody>
