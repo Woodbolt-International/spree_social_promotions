@@ -1,3 +1,13 @@
-<div class="field seven columns">
-  <%= text_area_tag "#{param_prefix}[raw_social_coupons]", promotion_rule.raw_social_coupons, class: 'input_string form-control' %>
+<div class="panel-body">
+  <div class="promo-rule-social-promotions">
+    <div class="promo-rule-instructions" style="margin-bottom: 20px">
+      Place a list of unique codes (one on each line and with no commas) and this "Update" to save them.
+    </div>
+
+    <%= text_area_tag "#{param_prefix}[raw_social_coupons]", promotion_rule.raw_social_coupons, class: 'input_string form-control', placeholder: "abc123\ndef456\nghi789" %>
+
+    <div class="promo-rule-instructions" style="margin-top: 20px">
+      Once saved, you will be able to view/disable the codes in the <%= link_to "Social Coupons", admin_social_coupons_path %> section.
+    </div>  
+  </div>
 </div>
