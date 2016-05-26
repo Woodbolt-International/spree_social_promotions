@@ -1,7 +1,7 @@
 SpreeSocialPromotions
 =====================
 
-Introduction goes here.
+Ability to handle Groupon-like promotions, letting you put multiple coupon codes on one promotion. Solidus has this built in.
 
 Installation
 ------------
